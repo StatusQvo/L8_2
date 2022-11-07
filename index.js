@@ -1,66 +1,26 @@
-SetVisibilityTurnOnOff()
+const number = parseInt(prompt('Введите верхнюю границу суммы чисел'))
+const type = 'odd'
 
-let globalVarOfSelectedValue = 0 //Глобальная переменная чтобы хранить выбор типа суммы
+const countResultingSum = function (number, type) {
+  const checkNan = isNaN(number)
 
-const promptValue = parseInt(prompt('Введите верхнюю границу суммы чисел'))
-isPromptValueNaN()
-
-function noteAboutSumOnOff() {
-  let presetSelectedValue = document.getElementById('numtype').value
-  if (presetSelectedValue === 'all') {
-    document.getElementById('noteSum').style.display = 'flex'
-  } else {
-    document.getElementById('noteSum').style.display = 'none'
-  }
-}
-
-function SetVisibilityTurnOnOff() {
-  const visibilityStatus =
-    document.getElementById('chooseTypeOfDataID').style.display
-  if (visibilityStatus === 'none') {
-    document.getElementById('chooseTypeOfDataID').style.display = 'flex'
-    noteAboutSumOnOff
-  } else {
-    document.getElementById('chooseTypeOfDataID').style.display = 'none'
-  }
-}
-
-function isPromptValueNaN() {
-  const isEnteredNumberValid = !isNaN(promptValue)
-  if (isEnteredNumberValid) {
-    SetVisibilityTurnOnOff()
-  } else {
+  if (checkNan) {
     alert('Максимальная граница суммы должна быть числом')
+  } else {
+    return getSumOfNumbers(number, type)
   }
 }
 
-const selectOption = document.getElementById('numtype')
-selectOption.addEventListener('change', function (event) {
-  //event.preventDefault()
-  noteAboutSumOnOff()
-})
+let finalMsg = countResultingSum(number, type)
 
-const submitBtn = document.getElementById('SubmitButton')
+console.log('result', finalMsg)
 
-submitBtn.addEventListener('click', function (event) {
-  event.preventDefault()
-
-  globalVarOfSelectedValue = document.getElementById('numtype').value
-  SetVisibilityTurnOnOff()
-
-  const result = getSumOfNumbers()
-  console.log('resultSum', result)
-  let resultMessage = alert(
-    `Сумма чисел с заданными параметрами будет равна: ${result}. Более подробные результаты вычисления отображены в консоли`
-  )
-})
-
-function getSumOfNumbers() {
+function getSumOfNumbers(number, type) {
   let sumResult = 0
 
-  for (let minRange = 0; minRange <= promptValue; minRange++) {
-    switch (globalVarOfSelectedValue) {
-      case 'all':
+  for (let minRange = 0; minRange <= number; minRange++) {
+    switch (type) {
+      case '':
         if (minRange) {
           console.log('cлагаемое:', minRange)
           sumResult += minRange
